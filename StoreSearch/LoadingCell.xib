@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoadingCell" id="Wj2-VG-qE0">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wj2-VG-qE0" id="5NC-UL-eXE">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5Y-jJ-b2r">
+                        <rect key="frame" x="112" y="30" width="96" height="20"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YYy-b4-Qeg">
+                                <rect key="frame" x="76" y="0.0" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfu-lG-cTn">
+                                <rect key="frame" x="0.0" y="2" width="68" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.50420055650684936" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="YYy-b4-Qeg" secondAttribute="bottom" id="Ga2-Yz-2vO"/>
+                            <constraint firstItem="Yfu-lG-cTn" firstAttribute="leading" secondItem="c5Y-jJ-b2r" secondAttribute="leading" id="I8q-Ht-es4"/>
+                            <constraint firstItem="Yfu-lG-cTn" firstAttribute="top" secondItem="c5Y-jJ-b2r" secondAttribute="top" constant="2" id="Jbb-iQ-wYh"/>
+                            <constraint firstAttribute="trailing" secondItem="YYy-b4-Qeg" secondAttribute="trailing" id="SMo-aD-qc5"/>
+                            <constraint firstAttribute="bottom" secondItem="Yfu-lG-cTn" secondAttribute="bottom" id="lhi-Vq-fLl"/>
+                            <constraint firstItem="YYy-b4-Qeg" firstAttribute="top" secondItem="c5Y-jJ-b2r" secondAttribute="top" id="n40-3e-BdH"/>
+                            <constraint firstItem="YYy-b4-Qeg" firstAttribute="leading" secondItem="Yfu-lG-cTn" secondAttribute="trailing" constant="8" id="o5f-9e-nGw"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="c5Y-jJ-b2r" firstAttribute="centerX" secondItem="5NC-UL-eXE" secondAttribute="centerX" id="78u-qH-4ck"/>
+                    <constraint firstItem="c5Y-jJ-b2r" firstAttribute="centerY" secondItem="5NC-UL-eXE" secondAttribute="centerY" id="dJP-8Z-GdG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="345" y="94"/>
+        </tableViewCell>
+    </objects>
+</document>
