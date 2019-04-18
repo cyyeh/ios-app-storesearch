@@ -23,13 +23,14 @@ class SearchViewController: UIViewController {
     }
   }
   var dataTask: URLSessionDataTask?
+  @IBOutlet weak var segmentedControl: UISegmentedControl!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     searchBar.becomeFirstResponder()
     
-    tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+    tableView.contentInset = UIEdgeInsets(top: 108, left: 0, bottom: 0, right: 0)
     var cellNib = UINib(nibName: TableView.CellIdentifiers.searchResultCell, bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.searchResultCell)
     cellNib = UINib(nibName: TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
@@ -37,10 +38,19 @@ class SearchViewController: UIViewController {
     cellNib = UINib(nibName: TableView.CellIdentifiers.loadingCell, bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.loadingCell)
   }
+  
+  // MARK:- Actions
+  @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+    performSearch()
+  }
 }
 
 extension SearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    performSearch()
+  }
+  
+  func performSearch() {
     if !searchBar.text!.isEmpty {
       searchBar.resignFirstResponder()
       
@@ -50,7 +60,7 @@ extension SearchViewController: UISearchBarDelegate {
       hasSearched = true
       searchResults = []
       
-      let url = iTunesURL(searchText: searchBar.text!)
+      let url = iTunesURL(searchText: searchBar.text!, category: segmentedControl.selectedSegmentIndex)
       let session = URLSession.shared
       dataTask = session.dataTask(with: url, completionHandler: {
         data, response, error in
@@ -113,12 +123,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
       } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.searchResultCell, for: indexPath) as! SearchResultCell
         let searchResult = searchResults[indexPath.row]
-        cell.nameLabel.text = searchResult.name
-        if searchResult.artist.isEmpty {
-          cell.artistNameLabel.text = "Unknown"
-        } else {
-          cell.artistNameLabel.text = String(format: "%@ (%@)", searchResult.artist, searchResult.type)
-        }
+        cell.configure(for: searchResult)
         
         return cell
       }
@@ -138,9 +143,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   // MARK:- Helper Methods
-  func iTunesURL(searchText: String) -> URL {
+  func iTunesURL(searchText: String, category: Int) -> URL {
+    let kind: String
+    switch category {
+    case 1: kind = "musicTrack"
+    case 2: kind = "software"
+    case 3: kind = "ebook"
+    default: kind = ""
+    }
+    
     let encodedText = searchText.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-    let urlString = String(format: "https://itunes.apple.com/search?term=%@", encodedText)
+    let urlString = "https://itunes.apple.com/search?term=\(encodedText)&limit=200&entity=\(kind)"
     let url = URL(string: urlString)
     return url!
   }
